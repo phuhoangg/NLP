@@ -29,62 +29,7 @@ Phần này là nền tảng quan trọng cho các phần sau. Việc hiểu rõ
 
 ---
 
-## Phần 2: Part-of-Speech Tagging với RNN
-
-### Phương pháp
-- **Mô hình**: Simple RNN cho token classification
-- **Architecture**: Embedding → RNN → Linear → Softmax
-- **Dataset**: Universal Dependencies English EWT corpus
-- **Hyperparameters**:
-  - Embedding dim: 64
-  - Hidden dim: 128
-  - Learning rate: 0.001
-  - Batch size: 32
-  - Epochs: 20 (với early stopping)
-
-### Kết quả định lượng
-
-| Metric | Training | Validation |
-|--------|----------|------------|
-| Final Accuracy | 94.44% | 87.65% |
-| Best Val Accuracy | - | 87.65% |
-| Total Parameters | 1,320,211 | - |
-
-### Kết quả F1-score theo tag
-
-| Tag | Precision | Recall | F1-score |
-|-----|-----------|--------|----------|
-| PUNCT | 0.99 | 0.99 | 0.99 |
-| DET | 0.97 | 0.95 | 0.96 |
-| PRON | 0.95 | 0.97 | 0.96 |
-| AUX | 0.95 | 0.94 | 0.95 |
-| VERB | 0.90 | 0.87 | 0.88 |
-| NOUN | 0.72 | 0.94 | 0.82 |
-| PROPN | 0.85 | 0.55 | 0.67 |
-
-### Phân tích lỗi
-Các lỗi phổ biến nhất:
-1. **PROPN → NOUN**: Proper noun bị nhầm với common noun
-2. **X → PUNCT**: Foreign words bị nhận diện nhầm thành dấu câu
-3. **SCONJ → ADP**: Subordinating conjunction bị nhầm với adposition
-
-### Ví dụ phân tích định tính
-
-**Câu ví dụ 1**: "The cat sits on the mat"
-```
-The          | DET (1.000)
-cat          | NOUN (0.998)
-sits         | NOUN (0.718)  ← Lỗi:VERB
-on           | ADP (0.948)
-the          | DET (1.000)
-mat          | NOUN (0.879)
-```
-
-**Phân tích**: Mô hình gặp khó khăn trong việc phân biệt VERB/NOUN cho các từ có thể đóng vai trò cả hai (như "sits"). Điều này cho thấy RNN đơn giản chưa đủ để nắm bắt ngữ cảnh phức tạp.
-
----
-
-## Phần 3: Text Classification so sánh nhiều phương pháp
+## Phần 2: Text Classification
 
 ### Các phương pháp so sánh
 
@@ -223,6 +168,61 @@ mat          | NOUN (0.879)
 2. Experiment với different embedding strategies
 3. Use data augmentation cho rare classes
 4. Consider ensemble methods cho production systems
+
+---
+
+## Phần 3: Part-of-Speech Tagging với RNN
+
+### Phương pháp
+- **Mô hình**: Simple RNN cho token classification
+- **Architecture**: Embedding → RNN → Linear → Softmax
+- **Dataset**: Universal Dependencies English EWT corpus
+- **Hyperparameters**:
+  - Embedding dim: 64
+  - Hidden dim: 128
+  - Learning rate: 0.001
+  - Batch size: 32
+  - Epochs: 20 (với early stopping)
+
+### Kết quả định lượng
+
+| Metric | Training | Validation |
+|--------|----------|------------|
+| Final Accuracy | 94.44% | 87.65% |
+| Best Val Accuracy | - | 87.65% |
+| Total Parameters | 1,320,211 | - |
+
+### Kết quả F1-score theo tag
+
+| Tag | Precision | Recall | F1-score |
+|-----|-----------|--------|----------|
+| PUNCT | 0.99 | 0.99 | 0.99 |
+| DET | 0.97 | 0.95 | 0.96 |
+| PRON | 0.95 | 0.97 | 0.96 |
+| AUX | 0.95 | 0.94 | 0.95 |
+| VERB | 0.90 | 0.87 | 0.88 |
+| NOUN | 0.72 | 0.94 | 0.82 |
+| PROPN | 0.85 | 0.55 | 0.67 |
+
+### Phân tích lỗi
+Các lỗi phổ biến nhất:
+1. **PROPN → NOUN**: Proper noun bị nhầm với common noun
+2. **X → PUNCT**: Foreign words bị nhận diện nhầm thành dấu câu
+3. **SCONJ → ADP**: Subordinating conjunction bị nhầm với adposition
+
+### Ví dụ phân tích định tính
+
+**Câu ví dụ 1**: "The cat sits on the mat"
+```
+The          | DET (1.000)
+cat          | NOUN (0.998)
+sits         | NOUN (0.718)  ← Lỗi:VERB
+on           | ADP (0.948)
+the          | DET (1.000)
+mat          | NOUN (0.879)
+```
+
+**Phân tích**: Mô hình gặp khó khăn trong việc phân biệt VERB/NOUN cho các từ có thể đóng vai trò cả hai (như "sits"). Điều này cho thấy RNN đơn giản chưa đủ để nắm bắt ngữ cảnh phức tạp.
 
 ---
 
