@@ -43,8 +43,31 @@ NLP/
 │   │   ├── lab5_spark_sentiment_analysis.py
 │   │   └── lab5_improvement_test.py
 │   └── lab5_text_classification.md
-├── data/                    # Datasets
-│   └── sentiments.csv
+├── lab5_rnn/                # Lab 5: Recurrent Neural Networks
+│   ├── part_1/              # PyTorch Introduction
+│   │   └── lab5_pytorch_introduction.ipynb
+│   ├── part_2/              # RNN Text Classification
+│   ├── part_3/              # LSTM Text Classification
+│   └── part_4/              # Advanced RNN Techniques
+├── lab6/                    # Lab 6: Transformers
+│   └── lab6_intro_transformers.ipynb
+├── report/                  # All lab reports and documentation
+│   ├── lab_1.md            # Lab 1 report
+│   ├── lab_2.md            # Lab 2 report
+│   ├── lab_4.md            # Lab 4 report
+│   ├── lab_4_visualize_embedding.pdf  # Visualization results
+│   ├── lab_5_text_classification.md  # Text classification report
+│   ├── lab_5_rnns.md       # RNN implementation report
+│   └── lab6_intro_transformers.pdf  # Transformers notebook
+├── data/                    # Datasets and metadata
+│   ├── c4-train.*.json     # Common Crawl dataset for language modeling
+│   ├── sentiments.csv      # Sentiment analysis dataset
+│   └── UD_English-EWT/     # Universal Dependencies English dataset
+│       ├── *.conllu       # Annotated text data
+│       ├── *.txt          # Plain text versions
+│       ├── LICENSE.txt    # Dataset license
+│       └── README.md      # Dataset structure documentation
+├── .gitignore             # Git ignore rules for data files
 └── README.md
 ```
 
@@ -90,26 +113,60 @@ NLP/
   - **Performance Analysis:** So sánh 3 methods (TF-IDF+LR, TF-IDF+Naive Bayes, Word2Vec+LR)
 - **Kết quả:** 70.6% accuracy với TF-IDF + Logistic Regression
 
+### Lab 5: Recurrent Neural Networks (RNNs)
+- **Mục tiêu:** Implement RNN architectures cho NLP tasks
+- **Thực hiện:**
+  - **Part 1:** PyTorch foundation và tensor operations
+  - **Part 2:** Basic RNN implementation cho text classification
+  - **Part 3:** LSTM và GRU models cho long sequences
+  - **Part 4:** Advanced RNN techniques và optimizations
+- **Công nghệ:** PyTorch, TensorFlow, Keras, Gensim
+- **Applications:** Text classification, sequence modeling, sentiment analysis
+
+### Lab 6: Transformers
+- **Mục tiêu:** Introduction to Transformer architecture và pre-trained models
+- **Thực hiện:**
+  - **Task 1:** Masked Language Modeling với BERT (fill-mask)
+  - **Task 2:** Text generation với GPT models
+  - **Task 3:** Sentence embeddings và Mean Pooling với BERT
+  - **Advanced:** Attention mechanisms và transformer applications
+- **Công nghệ:** Hugging Face Transformers, BERT, GPT, DistilBERT
+- **Kết quả:** Thành công sử dụng pre-trained models cho các NLP tasks
+  - BERT fill-mask: "capital" predicted with 40.33% confidence
+  - Sentence embeddings: 768-dimensional vectors from BERT
+
 ## 🛠️ Installation & Setup
 
 ### Yêu cầu hệ thống
-- Python 3.8+
+- Python 3.10+ (for Lab 5 RNNs and Lab 6 Transformers)
+- GPU (khuyến khích cho PyTorch/TensorFlow training)
+- VRAM: Tối thiểu 4GB cho deep learning models
 - Git
-- IDE (PyCharm/VS Code recommended)
+- IDE (PyCharm/VS Code/Jupyter recommended)
 
 ### Cài đặt dependencies
 ```bash
 # Basic dependencies
 pip install numpy pandas scikit-learn
 
-# Advanced dependencies cho Lab 5
-pip install pyspark
+# Lab 1-3: Basic NLP
+pip install matplotlib seaborn
 
-# Word embeddings cho Lab 4
+# Lab 4: Word embeddings
 pip install gensim
 
-# Visualization
-pip install matplotlib seaborn
+# Lab 5: PySpark cho large datasets
+pip install pyspark
+
+# Lab 5 RNNs: Deep learning frameworks
+pip install torch torchvision torchaudio
+pip install tensorflow tensorflow-addons
+
+# Lab 6: Transformers
+pip install transformers datasets tokenizers
+
+# Jupyter notebooks cho interactive labs
+pip install jupyter notebook ipykernel
 ```
 
 ### Environment setup
@@ -122,8 +179,10 @@ cd NLP
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 
-# Install dependencies
-pip install -r requirements.txt
+# Install dependencies theo từng lab hoặc install tất cả
+pip install -r requirements.txt  # If available, hoặc install theo batch ở trên
+
+# Đối với Colab users: Các dependencies đã được cài đặt sẵn
 ```
 
 ## 🚀 Usage Examples
@@ -153,13 +212,50 @@ python lab5/test/lab5_spark_sentiment_analysis.py
 python lab5/test/lab5_improvement_test.py
 ```
 
+### Chạy Lab 5 RNNs:
+```bash
+# Part 1: PyTorch Introduction
+jupyter notebook lab5_rnn/part_1/lab5_pytorch_introduction.ipynb
+
+# Part 2-4: RNN models
+# Các notebook khác trong thư mục lab5_rnn/part_2, part_3, part_4
+```
+
+### Chạy Lab 6: Transformers
+```bash
+# Interactive notebook
+jupyter notebook lab6/lab6_intro_transformers.ipynb
+```
+
+## 📊 Project Summary
+
+### Các thay đổi và cải tiến đã thực hiện
+- **File Organization:** Tạo `report/` folder và chuẩn hóa tên file theo quy luật lowercase với underscores
+- **Data Management:** Implement `.gitignore` rules để chỉ upload metadata và giữ lại file description
+- **Documentation:** Tạo comprehensive data schema documentation với field descriptions và sample data
+- **README Updates:** Cập nhật thông tin đầy đủ về Lab 5 RNNs và Lab 6 Transformers
+
+### Dataset Information
+Project sử dụng các dataset đa dạng:
+- **Sentiment Analysis**: Binary classification với textual data
+- **C4 Training**: Large-scale language modeling dataset
+- **Universal Dependencies**: Annotated text cho NLP tasks (POS tagging, dependency parsing)
+- **Custom datasets**: Generated và processed cho các lab exercises
+
+### Model Performance Highlights
+- **Text Classification**: 70.6% accuracy (TF-IDF + Logistic Regression)
+- **BERT Fill-Mask**: 40.33% confidence cho "capital" prediction
+- **Word Embeddings**: Successfully implemented semantic similarity analysis
+
 ## Development Tools
 
 **Công cụ hỗ trợ:**
 - **Claude Code (Anthropic)** - Code generation và debugging
 - **ChatGPT (OpenAI)** - Syntax checking và optimization
-- **PyCharm/VS Code** - Development environment
+- **PyCharm/VS Code/Jupyter** - Development environment
 - **Git/GitHub** - Version control
+- **Hugging Face** - Pre-trained model repository
+- **Colab/Kaggle** - Cloud GPU environments
 
 ## 📄 License
 

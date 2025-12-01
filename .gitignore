@@ -1,0 +1,17 @@
+# Ignore data files but keep metadata and description files
+
+# Ignore large data files
+*.json
+*.csv
+*.conllu
+*.txt
+
+# Keep important description and metadata files in data/
+!data/LICENSE.txt
+!data/stats.xml
+!data/README.md
+
+nul
+NUL
+
+
