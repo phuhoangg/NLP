@@ -1,4 +1,4 @@
-# Báo cáo chuyên sâu về Công nghệ Text-to-Speech (TTS): Tổng quan nghiên cứu, Hướng phát triển và Phân tích kiến trúc
+# Nghiên cứu về Text-to-speech
 
 ## 1. Bối cảnh
 
