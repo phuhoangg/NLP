@@ -13,5 +13,8 @@
 
 nul
 NUL
+__pycache__
+.idea
+
 
 

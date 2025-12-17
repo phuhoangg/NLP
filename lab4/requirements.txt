@@ -1,7 +1,0 @@
-# Lab 4 - Word Embedding Dependencies
-
-gensim>=4.2.0
-
-numpy>=1.21.0
-
-pyspark>=3.3.0
